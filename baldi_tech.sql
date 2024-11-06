@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 05-11-2024 a las 16:05:02
+-- Tiempo de generación: 29-10-2024 a las 20:20:48
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.1.25
 
@@ -31,40 +31,16 @@ CREATE TABLE `componentes` (
   `id` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `precio` decimal(10,2) NOT NULL,
-  `cantidad` int(11) NOT NULL,
-  `categoria` varchar(50) DEFAULT NULL,
-  `imagen` varchar(64) DEFAULT NULL
+  `cantidad` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `componentes`
 --
 
-INSERT INTO `componentes` (`id`, `nombre`, `precio`, `cantidad`, `categoria`, `imagen`) VALUES
-(9, 'pantalla s24e3', 3444.00, 5, 'Monitores', 'imagenes_componentes/6728288222957_monitor s24e3.jpg'),
-(10, 'intel i9 12900k', 4500.00, 7, 'procesadores', 'imagenes_componentes/6728293ab8541_intel i9 12900k.jpg'),
-(11, 'redragon m801', 299.00, 6, 'Mouse', 'imagenes_componentes/6728d7db03642_redragon m801.jpg'),
-(12, 'corsair ml140', 300.00, 7, 'Mouse', 'imagenes_componentes/672a27d4b3c04_corsair ml140.jpg');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `usuarios`
---
-
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`id`, `username`, `password`, `created_at`) VALUES
-(1, 'admin', '$2y$10$yiocNSIxE62xMmLu9vlZGeoumQo6XNqBOHGQcar82vKmwzSTr8J7.', '2024-11-04 17:02:26');
+INSERT INTO `componentes` (`id`, `nombre`, `precio`, `cantidad`) VALUES
+(1, 'Procesador Intel', 200.00, 12),
+(2, 'Tarjeta gráfica Nvidia', 500.00, 5);
 
 --
 -- Índices para tablas volcadas
@@ -77,13 +53,6 @@ ALTER TABLE `componentes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -91,13 +60,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `componentes`
 --
 ALTER TABLE `componentes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
---
--- AUTO_INCREMENT de la tabla `usuarios`
---
-ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -21,6 +21,6 @@ if (isset($_GET['id'])) {
 
 $conexion->close();
 
-header("Location: listar_componentes.php");
+header("Location: /baldi_tech/home.php");
 exit;
 ?>

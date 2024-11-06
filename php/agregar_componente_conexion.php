@@ -1,4 +1,5 @@
 <?php
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conexion = new mysqli('localhost', 'root', '', 'baldi_tech');
 
@@ -31,17 +32,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql = "INSERT INTO componentes (nombre, precio, cantidad, categoria, imagen) VALUES ('$nombre', '$precio', '$cantidad', '$categoria', '$rutaArchivo')";
             
             if ($conexion->query($sql) === TRUE) {
-                echo "Componente agregado exitosamente";
+                $mensaje = "Componente agregado exitosamente";
+                $tipo = "success";
             } else {
-                echo "Error al agregar el componente: " . $conexion->error;
+                $mensaje = "Error al agregar el componente: " . $conexion->error;
+                $tipo = "error";
             }
         } else {
-            echo "Error al subir la imagen.";
+            $mensaje = "Error al subir la imagen.";
+            $tipo = "error";
         }
     } else {
-        echo "No se subió ninguna imagen o hubo un error.";
+        $mensaje = "No se subió ninguna imagen o hubo un error.";
+        $tipo = "error";
     }
+    
     $conexion->close();
+    
+    // Mostrar mensaje con diseño
+ // Mostrar mensaje con diseño
+ echo "
+ <div style='text-align: center; margin-top: 20px;'>
+     <h2 style='color: " . ($tipo === 'success' ? 'green' : 'red') . ";'>$mensaje</h2>
+     <a href='/baldi_tech/home.php' style='text-decoration: none; padding: 10px 20px; background-color: #007bff; color: white; border-radius: 5px; display: inline-block; margin-top: 20px;'>Regresar a Inicio</a>
+ </div>
+ ";
 }
 ?>
-

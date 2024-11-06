@@ -5,6 +5,44 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+
+<style>
+        /* Estilo del cuadro de búsqueda */
+        .search-box {
+            width: 250px;
+            padding: 10px;
+            border: 2px solid #007bff;
+            border-radius: 25px 0 0 25px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        /* Estilo del botón de búsqueda */
+        .search-button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: 2px solid #007bff;
+            border-left: none;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .search-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Contenedor de los botones y el buscador */
+        .action-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Espacio entre los elementos */
+            margin-top: 10px;
+        }
+    </style>
+
     <div class="container">
         <nav>
             <div class="navbar">
@@ -36,19 +74,54 @@
           <div class="main-body">
             <h1>Componentes</h1>
             <?php
-            if (isset($_SESSION['username'])) {
-            echo  "<a href='/baldi_tech/php/agregar_componente.php' style='text-decoration: none;'>
-            <button style='padding: 10px 15px; background-color: #101820; color: white; border: none; border-radius: 5px; cursor: pointer;'>Agregar componentes</button>
-            </a>";
-            }
-            ?>
-          <div class="search_bar">
-            <input type="search" placeholder="Busca tus componentes aqui...">
-          </div>
+                if (isset($_SESSION['username'])) {
+                    echo "<a href='/baldi_tech/php/agregar_componente.php' style='text-decoration: none; margin-right: 10px;'>
+                    <button style='padding: 10px 15px; background-color: #101820; color: white; border: none; border-radius: 5px; cursor: pointer;'>Agregar componentes</button>
+                    </a>";
+                    echo "<a href='/baldi_tech/php/carrito.php' style='text-decoration: none;'>
+                    <button style='padding: 10px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;'>Ver carrito</button>
+                    </a>";
+                }
+                ?>
+             <form method="POST" action="/baldi_tech/php/buscador.php" style="display: flex;">
+                        <input type="text" name="search" class="search-box" placeholder="Buscar...">
+                        <button type="submit" class="search-button">Buscar</button>
+                    </form>
+        <?php
+// Conexión a la base de datos
+$host = 'localhost';
+$usuario = 'root';
+$contrasena = '';
+$base_de_datos = 'baldi_tech';
+
+// Establecer la conexión
+$conexion = new mysqli($host, $usuario, $contrasena, $base_de_datos);
+
+// Verificar la conexión
+if ($conexion->connect_error) {
+    die("Conexión fallida: " . $conexion->connect_error);
+}
+
+// Procesar la búsqueda
+if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST['search'])) {
+    $busqueda = $conexion->real_escape_string($_POST['search']);
+    
+    // Puedes realizar tu consulta aquí si deseas mostrar resultados
+    // Si solo quieres redirigir, puedes hacerlo directamente
+    header("Location:http://localhost/baldi_tech/php/listar_componentes.php?categoria=" . urlencode($busqueda));
+    exit; // Detiene la ejecución
+}
+
+// Cerrar conexión
+$conexion->close();
+?>
+     
+            
+ 
     
     
           <div class="row">
-            <p>Selecciona lo que andas buscando <span>7</span> componentes distintos</p>
+            <p>Selecciona lo que andas buscando <span>5</span> componentes distintos</p>
           </div>
     
           <div class="job_card" onclick="window.location.href='php/listar_componentes.php?categoria=procesadores'">
@@ -60,10 +133,6 @@
                 <h2>Procesadores</h2>
                 <span>Intel y AMD</span>
               </div>
-            </div>
-            <div class="job_salary">
-              <h4>$6.7 - $12.5k /yr</h4>
-              <span>1 days ago</span>
             </div>
           </div>
           
@@ -77,10 +146,6 @@
                 <span>MSI y ASUS</span>
               </div>
             </div>
-            <div class="job_salary">
-              <h4>$8.7 - $13.2k /yr</h4>
-              <span>2 days ago</span>
-            </div>
           </div>
     
           <div class="job_card" onclick="window.location.href='php/listar_componentes.php?categoria=ventiladores'">
@@ -92,10 +157,6 @@
                 <h2>Ventiladores</h2>
                 <span>Corsair y XPG</span>
               </div>
-            </div>
-            <div class="job_salary">
-              <h4>$11 - $18.5k /yr</h4>
-              <span>2 days ago</span>
             </div>
           </div>
     
@@ -109,10 +170,6 @@
                 <span>RTX y RX</span>
               </div>
             </div>
-            <div class="job_salary">
-              <h4>$6 - $11.5k /yr</h4>
-              <span>3 days ago</span>
-            </div>
           </div>
     
           <div class="job_card" onclick="window.location.href='php/listar_componentes.php?categoria=mouse'">
@@ -124,10 +181,6 @@
                 <h2>Mouse</h2>
                 <span>Logitech y Razer</span>
               </div>
-            </div>
-            <div class="job_salary">
-              <h4>$12.5 - $25.5k /yr</h4>
-              <span>4 days ago</span>
             </div>
           </div>
         </div>

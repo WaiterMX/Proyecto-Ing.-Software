@@ -11,7 +11,7 @@
 
     <div class="form-container">
         <h2>Agregar Nuevo Componente</h2>
-        <form action="agregar_componente.php" method="POST" enctype="multipart/form-data">
+        <form action="agregar_componente_conexion.php" method="POST" enctype="multipart/form-data">
             <label for="nombre">Nombre:</label>
             <input type="text" id="nombre" name="nombre" required>
 
@@ -29,6 +29,11 @@
 
             <button type="submit">Agregar Componente</button>
         </form>
+        
+        <!-- Botón para ir a home.php -->
+        <a href="/baldi_tech/home.php" style="text-decoration: none;">
+            <button type="button" style="margin-top: 10px;">Ir a Home</button>
+        </a>
     </div>
 </body>
 </html>
